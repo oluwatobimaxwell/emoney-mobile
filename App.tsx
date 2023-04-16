@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "@emotion/react";
+import useLoadFont from "./src/hooks/useFonts";
+import { useAppTheme } from "./src/contexts/useTheme";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function App() {
+import { StatusBar } from "expo-status-bar";
+import { Text, View } from "react-native";
+import AppNavigator from "./src/components/navigation/MainNavigation";
+
+const App = () => {
+  const { isLoaded } = useLoadFont();
+  const theme = useAppTheme();
+
+  if (!isLoaded) {
+    return (
+      <View style={{ flex: 1, paddingTop: 300 }}>
+        <Text>Loading</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <ThemeProvider theme={theme}>
       <StatusBar style="auto" />
-    </View>
+      <AppNavigator/>
+    </ThemeProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const queryClient = new QueryClient();
+
+const Main = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <App />
+      </SafeAreaProvider>
+    </QueryClientProvider>
+  );
+};
+
+export default Main;
