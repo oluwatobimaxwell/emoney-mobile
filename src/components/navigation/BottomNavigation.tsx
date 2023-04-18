@@ -21,10 +21,7 @@ const BottomNavigation = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor:
-            theme.scheme === "light"
-              ? theme.lightenBlack(0.1)
-              : theme.lightenWhite(0.9),
+          backgroundColor: theme.colors.white,
           borderTopWidth: 0,
           height: 85,
         },
@@ -35,13 +32,13 @@ const BottomNavigation = () => {
       }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="Dashboard"
         component={DashboardScreen}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Dashboard",
           tabBarIcon: ({ focused }) => (
             <ImageIcon
-              name={focused ? "home-bold" : "home"}
+              name={focused ? "wallet" : "wallet"}
               size={tabIconProps.size}
               tint={theme.scheme === "dark" ? "white" : "black"}
               style={{ opacity: focused ? 1 : tabIconProps.opacity }}
@@ -50,13 +47,13 @@ const BottomNavigation = () => {
         }}
       />
       <BottomTab.Screen
-        name="Search"
+        name="Transactions"
         component={TransactionsScreen}
         options={{
-          tabBarLabel: "briefcase",
+          tabBarLabel: "Transactions",
           tabBarIcon: ({ focused }) => (
             <ImageIcon
-              name={focused ? "briefcase-bold" : "briefcase"}
+              name={focused ? "workBold" : "work"}
               size={tabIconProps.size}
               tint={theme.scheme === "dark" ? "white" : "black"}
               style={{ opacity: focused ? 1 : tabIconProps.opacity }}

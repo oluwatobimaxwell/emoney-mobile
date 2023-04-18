@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { StyleProp, TextStyle } from "react-native";
 import { theme } from "../../config/theme";
 
-const textStyles = {
+export const textStyles = {
   h1: { fontSize: 32, fontFamily: "ExtraBold", lineHeight: 40 },
   h2: { fontSize: 28, fontFamily: "Bold", lineHeight: 36 },
   h3: { fontSize: 24, fontFamily: "Bold", lineHeight: 32 },

@@ -8,7 +8,6 @@ const icons = {
   "arrow-right": require("@icons/Arrow-Right.png"),
   "bookmark-app": require("@icons/Bookmark.png"),
   "close-square": require("@icons/Close-Square.png"),
-  wallet: require("@icons/Fill-1.png"),
   person: require("@icons/Group-74.png"),
   lock: require("@icons/Group-75.png"),
   hide: require("@icons/Hide.png"),
@@ -39,6 +38,10 @@ const icons = {
   "plus-bold": require("@icons/Plus-Bold.png"),
   "search-bold": require("@icons/Search-Bold.png"),
   category: require("@icons/Category.png"),
+  wallet: require("@icons/Wallet.png"),
+  walletBold: require("@icons/Wallet-1.png"),
+  workBold: require("@icons/Work.png"),
+  work: require("@icons/Work-1.png"),
 };
 
 type ImageIconType = keyof typeof icons;

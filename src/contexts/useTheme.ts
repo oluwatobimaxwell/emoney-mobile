@@ -15,5 +15,6 @@ export const useAppTheme = () => {
     lightenWhite: (x: number) => hexToRgba(colors.white, x),
     lightenPrimary: (x: number) => hexToRgba(colors.primary, x),
     lightenSecondary: (x: number) => hexToRgba(colors.secondary, x),
+    lighten: (color: string, x: number) => hexToRgba(color, x)
   };
 };

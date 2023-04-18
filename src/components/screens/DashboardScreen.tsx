@@ -1,12 +1,17 @@
 import styled from "@emotion/native";
 import React from "react";
-import Text from "../common/Text";
+import WalletCard from "./components/WalletCard";
+import AppLayout from "../common/AppLayout";
+import RecentTransaction from "./components/RecentTransaction";
 
 const DashboardScreen = () => {
   return (
-    <Root>
-      <Text text="Dashboard Screen" />
-    </Root>
+    <AppLayout>
+      <Root>
+        <WalletCard />
+        <RecentTransaction />
+      </Root>
+    </AppLayout>
   );
 };
 

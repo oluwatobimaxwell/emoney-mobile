@@ -16,7 +16,7 @@ const AppNavigator = () => {
         screenOptions={{
           headerShown: false,
           cardStyle: {
-            backgroundColor: theme.colors.white,
+            backgroundColor: theme.colors.primary,
           },
         }}
       >

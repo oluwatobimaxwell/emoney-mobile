@@ -1,8 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import styled from "@emotion/native";
-import Text from "./Text";
+import Text, { textStyles } from "./Text";
 import ImageIcon, { IconName } from "./ImageIcon";
 import { useAppTheme } from "../../contexts/useTheme";
+
+export type Variant = "outlined" | "light";
 
 export interface ButtonProps {
   onPress: () => void;
@@ -15,6 +17,8 @@ export interface ButtonProps {
   textStyle?: object;
   iconRightComponet?: React.ReactNode;
   iconLeftComponet?: React.ReactNode;
+  variant?: Variant;
+  textVariant?: keyof typeof textStyles;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -28,14 +32,23 @@ const Button: FC<ButtonProps> = ({
   textStyle,
   iconRightComponet,
   iconLeftComponet,
+  variant,
+  textVariant
 }) => {
   const theme = useAppTheme();
+  const textColor = useMemo(() => {
+    if (variant === "light"){
+      return theme.scheme === "light" ? "black" : "white";
+    }
+    return theme.scheme === "dark" ? "black" : "white"
+  }, [variant])
   return (
     <ButtonContainer
       accessibilityRole="button"
       onPress={onPress}
       disabled={disabled}
       style={style}
+      variant={variant}
     >
       <IconWrap style={{ marginRight: 12 }}>
         {iconLeftComponet}
@@ -51,9 +64,10 @@ const Button: FC<ButtonProps> = ({
       <IconWrap>
         <Text
           text={text}
-          color={theme.scheme === "dark" ? "black" : "white"}
+          color={textColor}
           align="center"
           style={textStyle}
+          variant={textVariant}
         />
       </IconWrap>
       <IconWrap style={{ marginLeft: 12 }}>
@@ -75,15 +89,32 @@ export default Button;
 
 const ButtonContainer = styled.TouchableOpacity<{
   disabled?: boolean;
+  variant?: Variant;
 }>`
-  background-color: ${({ theme, disabled }: any) => theme.lightenWhite(disabled ? 0.4 : 0.9)};
   border-radius: 5px;
   align-items: center;
   justify-content: space-between;
   display: flex;
   flex-direction: row;
-  height: 55px;
+  height: 45px;
   padding: 0 16px;
+  ${({ variant, theme, disabled }: any) => {
+    switch (variant) {
+      case "outlined":
+        return `
+        border-width: 1px;
+        border-color: ${theme.colors.black};
+      `;
+      case "light":
+        return `
+        background-color: ${theme.lightenBlack(disabled ? 0.4 : 0.9)};
+      `;
+      default:
+        return `
+        background-color: ${theme.lightenWhite(disabled ? 0.4 : 0.9)};
+      `
+    }
+  }}
 `;
 
 const IconWrap = styled.View`
